@@ -12,16 +12,14 @@ array constructors in module variable initializers.
 
 ## Quick start
 
-Each directory has its own `generate.py`, `Makefile`, `test.F90`, and `README.md`.
+Each directory has its own `Makefile`, `test.F90`, and `README.md`.
 
 ```bash
 cd reshape_bug_nvfortran
-python3 generate.py
-FC=nvfortran make test    # crashes
+FC=nvfortran make test    # sefaults the compiler
 
 cd ../token_bug_ifx
-python3 generate.py
-FC=ifx make test          # crashes
+FC=ifx make test          # does not compile
 ```
 
 ## Compilers that handle both cases
