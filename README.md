@@ -1,12 +1,32 @@
-# Large array constructors 
+# Fortran compiler bugs with large array constructors
 
+Minimal reproducers for compiler bugs with large `real(dp)` bracket `[]`
+array constructors in module variable initializers.
 
-Simply compile `$FC -c big_array.F90` 
+## Bugs
 
-With nvhpc/26.1 it segfaults halfway through. 
+| Directory | Compiler | Bug | MRE size |
+|---|---|---|---|
+| `reshape_bug_nvfortran/` | nvfortran 26.1 | `fort1 TERMINATED by signal 11` on `reshape()` | 88K elements (2.9 MB) |
+| `token_bug_ifx/` | ifx | Max token size exceeded (41k limit) | 1.56M elements (51 MB) |
 
-ifx dies with maximum token size of 41k
+## Quick start
 
-gfortran compiles it wiht: `-fmax-array-constructor=1600000` 
+Each directory has its own `generate.py`, `Makefile`, `test.F90`, and `README.md`.
 
-flagn 21.1.3 compiled it no issues.
+```bash
+cd reshape_bug_nvfortran
+python3 generate.py
+FC=nvfortran make test    # crashes
+
+cd ../token_bug_ifx
+python3 generate.py
+FC=ifx make test          # crashes
+```
+
+## Compilers that handle both cases
+
+| Compiler | Notes |
+|---|---|
+| flang 21.1.3 | No issues |
+| gfortran | Needs `-fmax-array-constructor=N` flag |
