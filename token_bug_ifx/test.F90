@@ -20,7 +20,7 @@ program test_flat
     print '(a,es22.15)', "FAIL: data(1) = ", data(1)
     nerr = nerr + 1
   else
-    print *, "PASS: data(1) == 0"
+    print *, "PASS: data(1) /= 0"
   end if
 
   ! spot check data(1001) = 1000 * 1e-10
