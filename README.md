@@ -9,6 +9,7 @@ array constructors in module variable initializers.
 |---|---|---|---|
 | `reshape_bug_nvfortran/` | nvfortran 26.1 | `fort1 TERMINATED by signal 11` on `reshape()` | 88K elements (2.9 MB) |
 | `token_bug_ifx/` | ifx | Max token size exceeded (41k limit) | 1.56M elements (51 MB) |
+| `modulo_int64_target/` | nvfortran 26.3 | `modulo(int64)` inside OpenMP/OpenACC target — `pgf90_i8modulov_i8 not supported` | tiny |
 
 ## Quick start
 
